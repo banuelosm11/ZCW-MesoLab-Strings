@@ -53,7 +53,8 @@ public class DriversLicenseTest {
     @Test
     public void deserializeFromCSVTest(){
         //Given
-        String input = "Aaron,Long,456 Street Dr,Newark,NJ,06/17/1993,06/17/2014,06/30/2018\n"+
+        String input = "FIRSTNAME,LASTNAME,STREETADDRESS,CITY,STATE,DATEOFBIRTH,ISSUEDATE,EXPDATE\n"+
+        "Aaron,Long,456 Street Dr,Newark,NJ,06/17/1993,06/17/2014,06/30/2018\n"+
         "Chris,Kim,820 District Dr,Wilmington,DE,12/11/1980,08/12/2013,12/11/2018\n"+
         "Jarryd,Stamatelos,123 Main St ,Newark,NJ,3/17/1988,3/17/2016,3/20/2020\n"+
         "Nick,Cage,362 Fancy St,San Francisco,CA,02/02/1970,02/02/2000,02/02/2006\n"+

@@ -1,5 +1,9 @@
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by aurorabanuelos on 5/20/17.
@@ -22,11 +26,29 @@ private String issueDate;
 private String expDate;
 
 public String commaSeparatedValues;
+public ArrayList<String> listOfDriversLicenses = new ArrayList<String>();
+public ArrayList<DriversLicense> arrayListOfDriversLicenses = new ArrayList<DriversLicense>();
+
 public static String commaSeparatedHeader;
 
+public DriversLicense(){}
+public DriversLicense(String firstName, String lastName, String streetAddress, String city, String state, String dateOfBirth, String issueDate, String expDate){
+    this.firstName=firstName;
+    this.lastName=lastName;
+    this.streetAddress=streetAddress;
+    this.city=city;
+    this.state=state;
+    this.dateOfBirth=dateOfBirth;
+    this.issueDate=issueDate;
+    this.expDate=expDate;
+}
+
+
 public String serializeToCSV(){
-    return commaSeparatedValues = String.format("%s,%s,%s,%s,%s,%s,%s,%s", firstName, lastName,
+    commaSeparatedValues = String.format("%s,%s,%s,%s,%s,%s,%s,%s", firstName, lastName,
             streetAddress, city, state, dateOfBirth, issueDate, expDate);
+    listOfDriversLicenses.add(commaSeparatedValues);
+    return commaSeparatedValues;
 }
 
 public static String getCSVHeader(){
@@ -41,6 +63,17 @@ public static String getCSVHeader(){
     }
     sb.deleteCharAt(sb.length()-1);
     return sb.toString().toUpperCase();
+}
+
+public ArrayList<DriversLicense> deserializeFromCSV(String input){
+
+    String[] byLine = input.split("\n");
+    for(int i =0; i< byLine.length; i++){
+        String[] fieldsForDL = byLine[i].split(",");
+        arrayListOfDriversLicenses.add(new DriversLicense(fieldsForDL[0], fieldsForDL[1], fieldsForDL[2], fieldsForDL[3],
+                fieldsForDL[4], fieldsForDL[5], fieldsForDL[6], fieldsForDL[7]));
+    }
+    return arrayListOfDriversLicenses;
 }
 
     public String getFirstName() {
